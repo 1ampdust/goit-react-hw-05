@@ -1,0 +1,10 @@
+.errorMassage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #a1c3d1;
+    border: 2px solid #b39bc8;
+    width: 300px;
+    margin-top: 20px;
+    margin-left: 576.5px;
+}

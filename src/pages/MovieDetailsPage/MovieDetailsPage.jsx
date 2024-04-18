@@ -1,48 +1,64 @@
-
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import css from "./MovieDetailsPage.module.css";
+import { fetchMovieById } from "../../api/api";
+import Loader from "../../components/Loader/Loader";
+import MovieInfo from "../../components/MovieInfo/MovieInfo";
+import { useEffect, useRef, useState } from "react";
+import { Link, NavLink, Outlet, useLocation, useParams } from "react-router-dom";
+import clsx from "clsx";
 
 const MovieDetailsPage = () => {
+  const linkActive = ({ isActive }) => {
+    return clsx(css.castReviewBtn, isActive && css.active);
+  };
   const { movieId } = useParams();
-  const [movieDetails, setMovieDetails] = useState(null);
+
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const location = useLocation();
+  const backLinkRef = useRef(location.state?.from ?? "/");
 
   useEffect(() => {
-    const fetchMovieDetails = async () => {
+    if (!movieId) return;
+    async function getMovie() {
       try {
-        const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}`, {
-          params: {
-            api_key: 'edfa30751428edbd8ca7d1b6854eb9a6'
-          }
-        });
-        setMovieDetails(response.data);
+        setLoading(true);
+        const fetchedMovie = await fetchMovieById(movieId);
+        if (fetchedMovie.error) {
+          setError(fetchedMovie.error);
+        } else {
+          setSelectedMovie(fetchedMovie);
+        }
       } catch (error) {
-        console.error('Error fetching movie details:', error);
+        setError("Oops! Something went wrong! Please reload the page!");
+      } finally {
+        setLoading(false);
       }
-    };
+    }
 
-    fetchMovieDetails();
-
-    return () => {
-      setMovieDetails(null);
-    };
+    getMovie();
   }, [movieId]);
 
-  if (!movieDetails) {
-    return <div>Loading...</div>;
-  }
-
-  const { title, release_date, vote_average, overview, genres, poster_path } = movieDetails;
-
-  const imageUrl = `https://image.tmdb.org/t/p/w500${poster_path}`;
-
   return (
-    <div>
-      <h2>{title} ({release_date && release_date.substring(0, 4)})</h2>
-      <img src={imageUrl} alt={title} />
-      <p>User Score: {vote_average}</p>
-      <p>Overview: {overview}</p>
-      <p>Genres: {genres.map(genre => genre.name).join(', ')}</p>
+    <div className={css.castReview}>
+      {loading && <Loader />}
+      <Link to={backLinkRef.current} className={css.goBack}>
+        Go back
+      </Link>
+
+      {selectedMovie && <MovieInfo movie={selectedMovie} />}
+      {error && <p className={css.errorMessage}>{error}</p>}
+      <div className={css.castReviewList}>
+        <NavLink to="cast" className={linkActive}>
+          Cast
+        </NavLink>
+
+        <NavLink to="reviews" className={linkActive}>
+          Reviews
+        </NavLink>
+      </div>
+      <Outlet />
     </div>
   );
 };

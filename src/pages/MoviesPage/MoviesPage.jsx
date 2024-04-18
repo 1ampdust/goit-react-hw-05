@@ -1,71 +1,48 @@
-import { Formik, Form, Field } from 'formik';
-import { toast } from 'react-hot-toast';
-import { useState } from 'react';
-import axios from 'axios';
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import MovieList from "../../components/MovieList/MovieList";
+import { fetchMoviesBySearch } from "../../api/api";
+import { useSearchParams } from "react-router-dom";
+import Loader from "../../components/Loader/Loader";
+import css from "./MoviesPage.module.css";
 
 const MoviesPage = () => {
-  const [searchResults, setSearchResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [movieItems, setMovieItems] = useState([]);
 
-  const searchMovies = async (query) => {
-    try {
-      const apiKey = 'edfa30751428edbd8ca7d1b6854eb9a6';
-      const response = await axios.get('https://api.themoviedb.org/3/search/movie', {
-        params: {
-          query: query,
-          api_key: apiKey,
-          language: 'en-US',
-          page: 1
-        }
-      });
-      return response.data.results;
-    } catch (error) {
-      console.error('Error searching movies:', error);
-      throw error;
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const handleSubmit = (query) => {
+    if (!query) {
+      return;
     }
+    setSearchParams({ search: query });
   };
 
-  const handleSubmit = async (values, actions) => {
-    const formattedSearch = values.search.trim().toLowerCase();
-    if (formattedSearch !== '') {
+  useEffect(() => {
+    const value = searchParams.get("search");
+    if (!value) return;
+
+    async function getSearchMovies() {
       try {
-        const movies = await searchMovies(formattedSearch);
-        setSearchResults(movies);
+        setLoading(true);
+        const searchMovies = await fetchMoviesBySearch(value);
+        setMovieItems(searchMovies);
       } catch (error) {
-        console.error('Error fetching movies:', error);
-        toast.error('Error fetching movies');
+        return { error: "Oops! Something went wrong! Please reload the page!" };
+      } finally {
+        setLoading(false);
       }
-      actions.resetForm();
-    } else {
-      toast.error('Enter your search term!');
     }
-  };
-  
+    getSearchMovies();
+  }, [searchParams]);
+
   return (
-    <div>
-      <Formik initialValues={{ search: '' }} onSubmit={handleSubmit}>
-        <Form>
-          <Field
-            type="text"
-            autoComplete="off"
-            autoFocus
-            name="search"
-          />
-          <button type="submit">Search</button>
-        </Form>
-      </Formik>
-      {searchResults.length > 0 && (
-        <div>
-      <h1>Search results:</h1>
-      <ul>
-        {searchResults.map(movie => (
-          <li key={movie.id}>
-            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-      )}
+    <div className={css.moviesPage}>
+      <SearchBar onSubmit={handleSubmit} />
+      
+      {loading && <Loader />}
+      {searchParams && <MovieList items={movieItems} />}
     </div>
   );
 };
