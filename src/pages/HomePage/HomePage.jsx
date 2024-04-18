@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { fetchTrendingList } from '../../api/api';
 import Loader from '../../components/Loader/Loader';
 import MovieList from '../../components/MovieList/MovieList';
+import css from './HomePage.module.css';
 
 const HomePage = () => {
   const [movieItems, setMovieItems] = useState([]);
@@ -26,8 +27,8 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Trending Today</h1>
+    <div className={css.trendingsPage}>
+      <h1 className={css.trendings}>Trending Today:</h1>
       {loading && <Loader />}
       {error && (
         <h2>

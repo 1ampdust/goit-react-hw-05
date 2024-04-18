@@ -1,0 +1,22 @@
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #fce181;
+    border-bottom: 3px solid #9fedd7;
+    box-shadow: 0px 3px 6px -1px rgba(0, 0, 0, 0.75) ;
+    padding: 15px 0px;
+    margin-bottom: 20px;
+}
+
+.navlink {
+    padding: 8px;
+    color: black;
+    text-decoration: none;
+    font-size: 40px;
+}
+
+.active {
+    font-weight: bold;
+}

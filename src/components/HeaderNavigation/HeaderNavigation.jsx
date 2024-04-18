@@ -20,7 +20,6 @@ const HeaderNavigation = () => {
       <main>
         <Outlet />
       </main>
-      <footer></footer>
     </div>
   );
 };

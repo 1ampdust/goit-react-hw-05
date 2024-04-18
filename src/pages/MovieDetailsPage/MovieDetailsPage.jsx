@@ -41,15 +41,14 @@ const MovieDetailsPage = () => {
   }, [movieId]);
 
   return (
-    <div className={css.castReview}>
+    <div className={css.detailPage}>
       {loading && <Loader />}
-      <Link to={backLinkRef.current} className={css.goBack}>
+      <Link to={backLinkRef.current} className={css.backBtn}>
         Go back
       </Link>
-
       {selectedMovie && <MovieInfo movie={selectedMovie} />}
       {error && <p className={css.errorMessage}>{error}</p>}
-      <div className={css.castReviewList}>
+      <div className={css.detailList}>
         <NavLink to="cast" className={linkActive}>
           Cast
         </NavLink>

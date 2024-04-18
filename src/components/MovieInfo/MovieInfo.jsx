@@ -23,10 +23,10 @@ const MovieDetals = ({
         <h2 className={css.detalsTitle}>{`${title} (${
           release_date.split("-")[0]
         })`}</h2>
-        <p className={css.detalsText}>{`User store: ${Math.round(
+        <p className={css.detalsText}>{`User score: ${Math.round(
           vote_average * 10
         )}%`}</p>
-        <h3 className={css.detalsOwerview}>Owerview</h3>
+        <h3 className={css.detalsOverview}>Overview</h3>
         <p className={css.detalsText}>{overview}</p>
         {genres && genres.length > 0 && (
           <>

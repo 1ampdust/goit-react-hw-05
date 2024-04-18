@@ -25,7 +25,7 @@ const SearchBar = ({ onSubmit }) => {
             type="text"
             autoComplete="off"
             autoFocus
-            placeholder="Search images and photos"
+            placeholder="Search movies"
             name="search"
           />
           <ErrorMessage name="search" component="div" className={css.error} />

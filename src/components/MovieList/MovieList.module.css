@@ -1,0 +1,24 @@
+.movieList {
+    display: flex;
+    flex-direction: column;
+}
+
+.movieCard {
+    margin-bottom: 10px;
+    display: flex;
+    list-style: none;
+
+}
+
+.movieTitle {
+    color: #2470a0;
+    
+}
+
+.movieTitle:hover,
+.movieTitle:focus {
+    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.75);
+        transition: background-color 2s ease-out;
+        outline: none;
+    color: #060608;
+}
