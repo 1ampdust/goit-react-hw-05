@@ -76,8 +76,8 @@ const MovieCast = () => {
                 width={250}
                 height={375}
               />
-              <h2 className={css.moviesName}>{name}</h2>
-              <p className={css.moviesCharacter}>{`Character: ${character}`}</p>
+              <h2 className={css.castName}>{name}</h2>
+              <p className={css.castCharacter}>{`Character: ${character}`}</p>
             </li>
           ))
         ) : (

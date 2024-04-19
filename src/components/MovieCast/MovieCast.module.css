@@ -28,3 +28,16 @@
         box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.75);
 }
 
+.castName {
+    max-width: 250px;
+overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.castCharacter {
+    max-width: 250px;
+overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
