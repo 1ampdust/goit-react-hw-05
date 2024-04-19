@@ -32,8 +32,16 @@
 
 .detailList {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     margin-left: 8px;
 }
 
+.linkActive {
+    color: #2470a0;
+    font-size: 23px;
+}
+
+.linkActive:hover,
+.linkActive:focus {
+    font-weight: bold;
+}

@@ -49,11 +49,12 @@ const MovieDetailsPage = () => {
       {selectedMovie && <MovieInfo movie={selectedMovie} />}
       {error && <p className={css.errorMessage}>{error}</p>}
       <div className={css.detailList}>
-        <NavLink to="cast" className={linkActive}>
+        <h2>Additional information:</h2>
+        <NavLink to="cast" className={css.linkActive || linkActive}>
           Cast
         </NavLink>
 
-        <NavLink to="reviews" className={linkActive}>
+        <NavLink to="reviews" className={css.linkActive || linkActive}>
           Reviews
         </NavLink>
       </div>

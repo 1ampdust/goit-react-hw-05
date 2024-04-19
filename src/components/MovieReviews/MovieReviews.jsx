@@ -51,8 +51,8 @@ const MovieReviews = () => {
         </p>
       )}
 
-      <Link to={`/movies/${movieId}`} className={css.goBack}>
-  Go back
+      <Link to={`/movies/${movieId}`} className={css.goBackBtn}>
+  ←
 </Link>
 
 

@@ -57,10 +57,9 @@ const MovieCast = () => {
         </div>
       )}
 
-      <Link to={`/movies/${movieId}`} className={css.goBack}>
-  Go back
+      <Link to={`/movies/${movieId}`} className={css.goBackBtn}>
+  ←
 </Link>
-
 
       <ul className={css.castList}>
         {castMovie.length > 0 ? (

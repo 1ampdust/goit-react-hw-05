@@ -8,7 +8,7 @@ const MovieDetals = ({
     noinfo;
 
   return (
-    <div className={css.detalsPage}>
+    <div className={css.detailsPage}>
       <img
         className={css.posterImage}
         src={
@@ -19,19 +19,19 @@ const MovieDetals = ({
         alt={title}
         width={350}
       />
-      <div className={css.detalsInfo}>
-        <h2 className={css.detalsTitle}>{`${title} (${
+      <div className={css.detailsInfo}>
+        <h2 className={css.detailsTitle}>{`${title} (${
           release_date.split("-")[0]
         })`}</h2>
-        <p className={css.detalsText}>{`User score: ${Math.round(
+        <p className={css.detailsText}>{`User score: ${Math.round(
           vote_average * 10
         )}%`}</p>
-        <h3 className={css.detalsOverview}>Overview</h3>
-        <p className={css.detalsText}>{overview}</p>
+        <h3 className={css.detailsOverview}>Overview</h3>
+        <p className={css.detailsText}>{overview}</p>
         {genres && genres.length > 0 && (
           <>
-            <h4 className={css.detalsGenres}>Genres</h4>
-            <p className={css.detalsText}>
+            <h4 className={css.detailsGenres}>Genres</h4>
+            <p className={css.detailsText}>
               {genres.map((genre, idx) => (
                 <span className={css.genre} key={idx}>
                   {genre.name} {idx < genres.length - 1 && ", "}

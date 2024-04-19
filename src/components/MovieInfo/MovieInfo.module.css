@@ -9,3 +9,25 @@
     margin-bottom: 20px;
     box-shadow: inset 0 0 0 10px #2470a0;
 }
+
+.detailsPage {
+    display: flex;
+}
+
+.detailsInfo {
+    margin-left: 20px;
+}
+
+.detailsTitle {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.detailsText {
+    margin-bottom: 20px;
+}
+
+.detailsOverview {
+    font-weight: bold;
+} 
